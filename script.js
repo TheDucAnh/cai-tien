@@ -1,8 +1,18 @@
+// Hàm hiển thị bài học lập trình theo ngôn ngữ được chọn
 function showProgramming(language) {
+  const calculatorPrimary = document.getElementById('calculatorPrimary');
+  const calculatorSecondary = document.getElementById('calculatorSecondary');
+  const programmingContent = document.getElementById('programmingContent');
+  const menuBtn = document.getElementById('menuBtn');
+  const programmingTitle = document.getElementById('programmingTitle');
+  const programmingDescription = document.getElementById('programmingDescription');
+
+  // Ẩn các calculator, hiện phần nội dung lập trình
   calculatorPrimary.style.display = 'none';
   calculatorSecondary.style.display = 'none';
   programmingContent.style.display = 'block';
 
+  // Cập nhật nút menu và tiêu đề bài học
   menuBtn.innerText = "Chọn máy tính ▼";
   programmingTitle.innerText = `Bài học: ${language}`;
 
@@ -196,3 +206,14 @@ puts "Tên bạn là #{name}"
 
   programmingDescription.innerText = description;
 }
+
+// Ví dụ: Gắn sự kiện cho menu chọn ngôn ngữ
+document.addEventListener('DOMContentLoaded', () => {
+  const menuItems = document.querySelectorAll('.menu-item');
+  menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const language = item.innerText.trim();
+      showProgramming(language);
+    });
+  });
+});

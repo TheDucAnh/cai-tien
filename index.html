@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Máy tính đa năng</title>
+  <title>tutor for programming and caculators </title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,6 +12,16 @@
     <h1>Máy Tính</h1>
     <button class="menu-btn" id="menuBtn">Chọn máy tính ▼</button>
   </header>
+
+  <!-- Menu dropdown bên trái -->
+  <div id="sideMenuDropdown" style="display:none;">
+    <div onclick="showCalculator('primary')">Máy tính tiểu học</div>
+    <div onclick="showCalculator('secondary')">Máy tính cấp 2</div>
+    <div onclick="showProgramming('Python')">Bài học Python</div>
+    <div onclick="showProgramming('Java')">Bài học Java</div>
+    <div onclick="showProgramming('Scratch')">Bài học Scratch</div>
+    <div onclick="showProgramming('Các ngôn ngữ khác')">Các ngôn ngữ khác</div>
+  </div>
 
   <div class="calculator" id="calculatorContainer">
 

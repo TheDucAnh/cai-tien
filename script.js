@@ -1,27 +1,3 @@
-const menuBtn = document.getElementById('menuBtn');
-const calculatorPrimary = document.getElementById('calculatorPrimary');
-const calculatorSecondary = document.getElementById('calculatorSecondary');
-const programmingContent = document.getElementById('programmingContent');
-const programmingTitle = document.getElementById('programmingTitle');
-const programmingDescription = document.getElementById('programmingDescription');
-
-const leftMenuBtn = document.getElementById('leftMenuBtn');
-
-// Hiển thị máy tính tiểu học mặc định
-function showPrimary() {
-  calculatorPrimary.style.display = 'block';
-  calculatorSecondary.style.display = 'none';
-  programmingContent.style.display = 'none';
-  menuBtn.innerText = "Máy tính tiểu học ▼";
-}
-function showSecondary() {
-  calculatorPrimary.style.display = 'none';
-  calculatorSecondary.style.display = 'block';
-  programmingContent.style.display = 'none';
-  menuBtn.innerText = "Máy tính cấp 2 ▼";
-}
-
-// Hiển thị nội dung bài học lập trình
 function showProgramming(language) {
   calculatorPrimary.style.display = 'none';
   calculatorSecondary.style.display = 'none';
@@ -34,147 +10,189 @@ function showProgramming(language) {
 
   switch(language) {
     case "Python":
-      description = `Python là ngôn ngữ lập trình dễ học, phổ biến.\n\nVí dụ cơ bản:\nprint("Hello, world!")\nx = 5\ny = 10\nprint(x + y)`;
+      description = `
+🔹 Python là gì?
+Python là một ngôn ngữ lập trình bậc cao, dễ học, cú pháp đơn giản và rất phổ biến.
+
+🔹 In ra màn hình:
+print("Hello, World!")
+
+🔹 Biến & kiểu dữ liệu:
+name = "Lan"
+age = 18
+is_student = True
+
+🔹 Phép toán:
+a = 5
+b = 3
+print(a + b)  # Cộng
+print(a ** b) # Lũy thừa
+
+🔹 Câu điều kiện:
+if age >= 18:
+    print("Bạn đã trưởng thành.")
+else:
+    print("Bạn chưa đủ tuổi.")
+
+🔹 Vòng lặp:
+for i in range(5):
+    print(i)
+
+🔹 Hàm:
+def say_hello(name):
+    print("Xin chào", name)
+
+say_hello("Lan")
+
+🔹 Danh sách:
+fruits = ["Táo", "Cam", "Xoài"]
+for fruit in fruits:
+    print(fruit)
+`;
       break;
+
     case "Java":
-      description = `Java là ngôn ngữ lập trình đa nền tảng, phổ biến trong doanh nghiệp.\n\nVí dụ cơ bản:\npublic class HelloWorld {\n  public static void main(String[] args) {\n    System.out.println("Hello, world!");\n  }\n}`;
+      description = `
+🔹 Java là gì?
+Java là ngôn ngữ lập trình hướng đối tượng, được dùng rộng rãi trong các hệ thống doanh nghiệp, ứng dụng Android, và phần mềm đa nền tảng.
+
+🔹 Chương trình đơn giản:
+public class Hello {
+  public static void main(String[] args) {
+    System.out.println("Xin chào Java!");
+  }
+}
+
+🔹 Biến & kiểu dữ liệu:
+int age = 20;
+String name = "Nam";
+boolean isStudent = true;
+
+🔹 Toán học:
+int a = 10, b = 3;
+System.out.println(a + b); // Cộng
+System.out.println(Math.pow(a, b)); // Lũy thừa
+
+🔹 Điều kiện:
+if (age >= 18) {
+  System.out.println("Trưởng thành");
+} else {
+  System.out.println("Chưa đủ tuổi");
+}
+
+🔹 Vòng lặp:
+for (int i = 0; i < 5; i++) {
+  System.out.println(i);
+}
+
+🔹 Hàm:
+public static int tong(int x, int y) {
+  return x + y;
+}
+System.out.println(tong(5, 10));
+
+🔹 Mảng:
+String[] colors = {"Đỏ", "Xanh", "Vàng"};
+for (String color : colors) {
+  System.out.println(color);
+}
+`;
       break;
+
     case "Scratch":
-      description = `Scratch là ngôn ngữ lập trình đồ họa, rất phù hợp cho người mới học lập trình.\n\nVí dụ cơ bản:\n- Kéo thả các khối lệnh để tạo trò chơi hoặc hoạt hình.`;
+      description = `
+🔹 Scratch là gì?
+Scratch là một ngôn ngữ lập trình kéo thả, dành cho trẻ em và người mới học lập trình. Nó giúp rèn tư duy logic thông qua hoạt động tạo game, hoạt hình.
+
+🔹 Giao diện:
+- Sân khấu (Stage)
+- Nhân vật (Sprite)
+- Khối lệnh kéo thả
+
+🔹 Các nhóm lệnh chính:
+- Sự kiện: "Khi nhấn lá cờ xanh"
+- Di chuyển: "Di chuyển 10 bước", "quay 15 độ"
+- Hiển thị: "nói 'xin chào' trong 2 giây"
+- Lặp lại: "lặp lại 10 lần"
+- Điều kiện: "nếu ... thì"
+
+🔹 Ví dụ hoạt động đơn giản:
+[Khi nhấn lá cờ xanh]
+→ [Nói "Xin chào thế giới!" trong 2 giây]
+→ [Di chuyển 50 bước]
+→ [Lặp lại 10 lần → quay 15 độ → di chuyển 10 bước]
+
+🔹 Logic nâng cao:
+- Biến: điểm số, thời gian
+- Cảm biến: chạm màu, chạm cạnh
+- Điều kiện lồng nhau, vòng lặp lồng nhau
+
+🔹 Ứng dụng thực tế:
+- Làm game đơn giản (đuổi bắt, bắn súng)
+- Tạo hoạt hình, kể chuyện
+- Điều khiển robot (LEGO, Arduino qua Scratch)
+`;
       break;
+
     case "Các ngôn ngữ khác":
-      description = `Các ngôn ngữ lập trình khác bao gồm C++, JavaScript, Ruby, và nhiều hơn nữa.\nBạn có thể tìm hiểu thêm tùy theo sở thích và mục đích.`;
+      description = `
+🔹 C++ là gì?
+C++ là ngôn ngữ mạnh, thường dùng trong game, hệ điều hành và ứng dụng hiệu năng cao.
+
+🔹 Ví dụ:
+#include <iostream>
+using namespace std;
+
+int main() {
+  cout << "Xin chào từ C++!" << endl;
+  return 0;
+}
+
+🔹 Biến & kiểu dữ liệu:
+int a = 5;
+float b = 2.5;
+string name = "Linh";
+
+🔹 Vòng lặp & điều kiện:
+for (int i = 0; i < 5; i++) {
+  cout << i << endl;
+}
+
+if (a > b) {
+  cout << "a lớn hơn b";
+}
+
+🔹 JavaScript là gì?
+Ngôn ngữ lập trình dành cho web, chạy trực tiếp trên trình duyệt.
+
+🔹 Ví dụ:
+let name = "Trang";
+alert("Xin chào " + name);
+
+🔹 HTML & CSS là gì?
+- HTML tạo cấu trúc trang web.
+- CSS dùng để làm đẹp và bố cục trang web.
+
+🔹 HTML:
+<h1>Xin chào</h1>
+<p>Đây là đoạn văn</p>
+
+🔹 CSS:
+h1 {
+  color: red;
+  text-align: center;
+}
+
+🔹 Ruby:
+puts "Xin chào từ Ruby"
+name = "Mai"
+puts "Tên bạn là #{name}"
+`;
       break;
+
     default:
       description = "Nội dung đang cập nhật...";
   }
 
   programmingDescription.innerText = description;
 }
-
-// Xử lý menu chọn máy tính bên phải
-menuBtn.addEventListener('click', () => {
-  const existingMenu = document.getElementById('menuDropdown');
-  if (existingMenu) {
-    existingMenu.remove();
-    return;
-  }
-
-  const menu = document.createElement('div');
-  menu.id = 'menuDropdown';
-  menu.style.position = 'absolute';
-  menu.style.top = menuBtn.getBoundingClientRect().bottom + window.scrollY + 'px';
-  menu.style.right = '20px';
-  menu.style.background = 'white';
-  menu.style.border = '1px solid #ccc';
-  menu.style.borderRadius = '5px';
-  menu.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
-  menu.style.zIndex = 1000;
-  menu.style.width = '180px';
-
-  menu.innerHTML = `
-    <div id="menuPrimary" style="border-bottom: 1px solid #eee; padding:10px; cursor:pointer;">Máy tính tiểu học</div>
-    <div id="menuSecondary" style="padding:10px; cursor:pointer;">Máy tính cấp 2</div>
-  `;
-
-  document.body.appendChild(menu);
-
-  function outsideClick(event) {
-    if (!menu.contains(event.target) && event.target !== menuBtn) {
-      menu.remove();
-      document.removeEventListener('click', outsideClick);
-    }
-  }
-  document.addEventListener('click', outsideClick);
-
-  document.getElementById('menuPrimary').onclick = () => {
-    showPrimary();
-    menu.remove();
-  };
-  document.getElementById('menuSecondary').onclick = () => {
-    showSecondary();
-    menu.remove();
-  };
-});
-
-// Xử lý menu bên trái (hướng dẫn học lập trình)
-leftMenuBtn.addEventListener('click', () => {
-  const existingMenu = document.getElementById('sideMenuDropdown');
-  if (existingMenu) {
-    existingMenu.remove();
-    return;
-  }
-
-  const menu = document.createElement('div');
-  menu.id = 'sideMenuDropdown';
-  menu.style.position = 'absolute';
-  menu.style.top = leftMenuBtn.getBoundingClientRect().bottom + window.scrollY + 'px';
-  menu.style.left = '20px';
-  menu.style.background = 'white';
-  menu.style.border = '1px solid #ccc';
-  menu.style.borderRadius = '5px';
-  menu.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
-  menu.style.zIndex = 1000;
-  menu.style.width = '220px';
-
-  menu.innerHTML = `
-    <div id="progPython">Python</div>
-    <div id="progJava">Java</div>
-    <div id="progScratch">Scratch</div>
-    <div id="progOthers">Các ngôn ngữ khác</div>
-  `;
-
-  document.body.appendChild(menu);
-
-  function outsideClick(event) {
-    if (!menu.contains(event.target) && event.target !== leftMenuBtn) {
-      menu.remove();
-      document.removeEventListener('click', outsideClick);
-    }
-  }
-  document.addEventListener('click', outsideClick);
-
-  document.getElementById('progPython').onclick = () => {
-    showProgramming('Python');
-    menu.remove();
-  };
-  document.getElementById('progJava').onclick = () => {
-    showProgramming('Java');
-    menu.remove();
-  };
-  document.getElementById('progScratch').onclick = () => {
-    showProgramming('Scratch');
-    menu.remove();
-  };
-  document.getElementById('progOthers').onclick = () => {
-    showProgramming('Các ngôn ngữ khác');
-    menu.remove();
-  };
-});
-
-// Hàm tính cho máy tính tiểu học
-function calculatePrimary() {
-  const expr = document.getElementById('expressionPrimary').value;
-  try {
-    // Coi như biểu thức toán học bình thường (không có ^ hay sqrt)
-    const result = eval(expr);
-    document.getElementById('resultPrimary').innerText = `Kết quả: ${result}`;
-  } catch {
-    document.getElementById('resultPrimary').innerText = 'Biểu thức không hợp lệ!';
-  }
-}
-
-// Hàm tính cho máy tính cấp 2 (hỗ trợ ^ và sqrt)
-function calculateSecondary() {
-  let expr = document.getElementById('expressionSecondary').value;
-  try {
-    expr = expr.replace(/\^/g, '**'); // Thay ^ thành **
-    const result = eval(expr);
-    document.getElementById('resultSecondary').innerText = `Kết quả: ${result}`;
-  } catch {
-    document.getElementById('resultSecondary').innerText = 'Biểu thức không hợp lệ!';
-  }
-}
-
-// Mặc định hiển thị máy tính tiểu học
-showPrimary();

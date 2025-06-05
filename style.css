@@ -36,9 +36,7 @@ button.menu-btn {
 button.menu-btn:hover {
   background: #cce6ff;
 }
-#leftMenuBtn {
-  margin-right: 10px;
-}
+
 /* Menu dropdown bên trái */
 #sideMenuDropdown {
   position: absolute;
@@ -62,29 +60,7 @@ button.menu-btn:hover {
 #sideMenuDropdown div:hover {
   background-color: #cce6ff;
 }
-/* Menu chọn máy tính bên phải */
-#menuDropdown {
-  position: absolute !important;
-  top: 50px !important;
-  right: 20px !important;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  z-index: 1000;
-  width: 180px;
-}
-#menuDropdown div {
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #eee;
-}
-#menuDropdown div:last-child {
-  border-bottom: none;
-}
-#menuDropdown div:hover {
-  background-color: #cce6ff;
-}
+
 .calculator {
   background: white;
   padding: 20px 30px;
@@ -126,7 +102,7 @@ button.calc-btn:hover {
   color: #333;
   min-height: 24px;
 }
-/* Khu vực nội dung lập trình */
+
 #programmingContent {
   background: #f9f9f9;
   border: 1px solid #ddd;
@@ -134,10 +110,9 @@ button.calc-btn:hover {
   border-radius: 8px;
   max-height: 300px;
   overflow-y: auto;
-  text-align: left;
-  margin-top: 20px;
   white-space: pre-wrap;
 }
+
 /* Responsive cho màn hình nhỏ */
 @media (max-width: 600px) {
   #sideMenuDropdown {

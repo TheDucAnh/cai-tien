@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Máy tính đa năng</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Máy tính đa năng</h1>
+    <button class="menu-btn" id="menuBtn">Chọn máy tính ▼</button>
+  </header>
+
+  <div class="calculator" id="calculatorContainer">
+
+    <!-- Máy tính tiểu học -->
+    <div id="calculatorPrimary" style="display:none;">
+      <h2>Máy tính tiểu học</h2>
+      <input type="text" id="expressionPrimary" placeholder="Nhập phép tính (ví dụ: 2+3*4)" />
+      <button class="calc-btn" onclick="calculatePrimary()">Tính</button>
+      <p id="resultPrimary"></p>
+    </div>
+
+    <!-- Máy tính cấp 2 -->
+    <div id="calculatorSecondary" style="display:none;">
+      <h2>Máy tính cấp 2</h2>
+      <input type="text" id="expressionSecondary" placeholder="Ví dụ: 2^3 hoặc sqrt(16)" />
+      <button class="calc-btn" onclick="calculateSecondary()">Tính</button>
+      <p id="resultSecondary"></p>
+      <p><small>Hỗ trợ ^ cho lũy thừa, sqrt() cho căn bậc hai</small></p>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -8,7 +8,8 @@
 </head>
 <body>
   <header>
-    <h1>Máy tính đa năng</h1>
+    <button class="menu-btn" id="leftMenuBtn">Menu ▼</button>
+    <h1>Máy Tính</h1>
     <button class="menu-btn" id="menuBtn">Chọn máy tính ▼</button>
   </header>
 
@@ -29,6 +30,12 @@
       <button class="calc-btn" onclick="calculateSecondary()">Tính</button>
       <p id="resultSecondary"></p>
       <p><small>Hỗ trợ ^ cho lũy thừa, sqrt() cho căn bậc hai</small></p>
+    </div>
+
+    <!-- Khu vực hiển thị bài học lập trình -->
+    <div id="programmingContent" style="display:none;">
+      <h2 id="programmingTitle"></h2>
+      <div id="programmingDescription"></div>
     </div>
 
   </div>

@@ -1,20 +1,55 @@
 const menuBtn = document.getElementById('menuBtn');
 const calculatorPrimary = document.getElementById('calculatorPrimary');
 const calculatorSecondary = document.getElementById('calculatorSecondary');
+const programmingContent = document.getElementById('programmingContent');
+const programmingTitle = document.getElementById('programmingTitle');
+const programmingDescription = document.getElementById('programmingDescription');
+
+const leftMenuBtn = document.getElementById('leftMenuBtn');
 
 // Hiển thị máy tính tiểu học mặc định
 function showPrimary() {
   calculatorPrimary.style.display = 'block';
   calculatorSecondary.style.display = 'none';
+  programmingContent.style.display = 'none';
   menuBtn.innerText = "Máy tính tiểu học ▼";
 }
 function showSecondary() {
   calculatorPrimary.style.display = 'none';
   calculatorSecondary.style.display = 'block';
+  programmingContent.style.display = 'none';
   menuBtn.innerText = "Máy tính cấp 2 ▼";
 }
 
-// Xử lý menu khi bấm nút
+// Hiển thị nội dung bài học lập trình
+function showProgramming(language) {
+  calculatorPrimary.style.display = 'none';
+  calculatorSecondary.style.display = 'none';
+  programmingContent.style.display = 'block';
+
+  menuBtn.innerText = "Chọn máy tính ▼";
+  programmingTitle.innerText = `Bài học: ${language}`;
+
+  let description = "";
+
+  switch(language) {
+    case "Python":
+      description = `Python là ngôn ngữ lập trình dễ học, phổ biến.\n\nVí dụ cơ bản:\nprint("Hello, world!")\nx = 5\ny = 10\nprint(x + y)`;
+      break;
+    case "C++":
+      description = `C++ là ngôn ngữ lập trình mạnh mẽ, được dùng cho phần mềm hệ thống.\n\nVí dụ cơ bản:\n#include <iostream>\nusing namespace std;\n\nint main() {\n  cout << "Hello, world!" << endl;\n  return 0;\n}`;
+      break;
+    case "Java":
+      description = `Java là ngôn ngữ lập trình đa nền tảng, phổ biến trong doanh nghiệp.\n\nVí dụ cơ bản:\npublic class HelloWorld {\n  public static void main(String[] args) {\n    System.out.println("Hello, world!");\n  }\n}`;
+      break;
+    default:
+      description = "Nội dung đang cập nhật...";
+  }
+
+  programmingDescription.innerText = description;
+}
+
+// Xử lý menu chọn máy tính bên phải
 menuBtn.addEventListener('click', () => {
   // Nếu menu đã hiện thì xóa menu cũ
   const existingMenu = document.getElementById('menuDropdown');
@@ -23,7 +58,7 @@ menuBtn.addEventListener('click', () => {
     return;
   }
 
-  // Tạo menu dropdown
+  // Tạo menu dropdown bên phải
   const menu = document.createElement('div');
   menu.id = 'menuDropdown';
   menu.style.position = 'absolute';
@@ -37,13 +72,12 @@ menuBtn.addEventListener('click', () => {
   menu.style.width = '180px';
 
   menu.innerHTML = `
-    <div style="padding: 10px; cursor: pointer; border-bottom: 1px solid #eee;" id="menuPrimary">Máy tính tiểu học</div>
-    <div style="padding: 10px; cursor: pointer;" id="menuSecondary">Máy tính cấp 2</div>
+    <div id="menuPrimary" style="border-bottom: 1px solid #eee;">Máy tính tiểu học</div>
+    <div id="menuSecondary">Máy tính cấp 2</div>
   `;
 
   document.body.appendChild(menu);
 
-  // Bấm ra ngoài menu thì đóng menu
   function outsideClick(event) {
     if (!menu.contains(event.target) && event.target !== menuBtn) {
       menu.remove();
@@ -52,61 +86,28 @@ menuBtn.addEventListener('click', () => {
   }
   document.addEventListener('click', outsideClick);
 
-  // Chọn menu tiểu học
   document.getElementById('menuPrimary').onclick = () => {
     showPrimary();
     menu.remove();
   };
-  // Chọn menu cấp 2
   document.getElementById('menuSecondary').onclick = () => {
     showSecondary();
     menu.remove();
   };
 });
 
-// Hàm tính máy tính tiểu học (dùng eval)
-function calculatePrimary() {
-  const expression = document.getElementById('expressionPrimary').value.trim();
-  const resultEl = document.getElementById('resultPrimary');
-  if (!expression) {
-    resultEl.innerText = "Vui lòng nhập phép tính!";
-    resultEl.style.color = "red";
-    return;
-  }
-  try {
-    const result = eval(expression);
-    resultEl.innerText = `Kết quả: ${result}`;
-    resultEl.style.color = "#333";
-  } catch {
-    resultEl.innerText = "Phép tính không hợp lệ!";
-    resultEl.style.color = "red";
-  }
-}
-
-// Hàm tính máy tính cấp 2 hỗ trợ ^ và sqrt()
-function calculateSecondary() {
-  const expression = document.getElementById('expressionSecondary').value.trim();
-  const resultEl = document.getElementById('resultSecondary');
-  if (!expression) {
-    resultEl.innerText = "Vui lòng nhập phép tính!";
-    resultEl.style.color = "red";
+// Xử lý menu bên trái (bổ sung thêm)
+leftMenuBtn.addEventListener('click', () => {
+  // Nếu menu đã hiện thì xóa menu cũ
+  const existingMenu = document.getElementById('sideMenuDropdown');
+  if (existingMenu) {
+    existingMenu.remove();
     return;
   }
 
-  try {
-    // Thay thế ^ thành ** và sqrt thành Math.sqrt
-    const safeExpression = expression
-      .replace(/\^/g, '**')
-      .replace(/sqrt/g, 'Math.sqrt');
-
-    const result = eval(safeExpression);
-    resultEl.innerText = `Kết quả: ${result}`;
-    resultEl.style.color = "#333";
-  } catch {
-    resultEl.innerText = "Phép tính không hợp lệ!";
-    resultEl.style.color = "red";
-  }
-}
-
-// Mặc định hiển thị máy tính tiểu học khi tải trang
-showPrimary();
+  // Tạo menu dropdown bên trái
+  const menu = document.createElement('div');
+  menu.id = 'sideMenuDropdown';
+  menu.style.position = 'absolute';
+  menu.style.top = leftMenuBtn.getBoundingClientRect().bottom + window.scrollY + 'px';
+  menu

@@ -1,219 +1,338 @@
-// Hàm hiển thị bài học lập trình theo ngôn ngữ được chọn
-function showProgramming(language) {
-  const calculatorPrimary = document.getElementById('calculatorPrimary');
-  const calculatorSecondary = document.getElementById('calculatorSecondary');
-  const programmingContent = document.getElementById('programmingContent');
-  const menuBtn = document.getElementById('menuBtn');
-  const programmingTitle = document.getElementById('programmingTitle');
-  const programmingDescription = document.getElementById('programmingDescription');
+// DOM elements
+const menuBtn = document.getElementById('menuBtn');
+const leftMenuBtn = document.getElementById('leftMenuBtn');
 
-  // Ẩn các calculator, hiện phần nội dung lập trình
+const calculatorPrimary = document.getElementById('calculatorPrimary');
+const calculatorSecondary = document.getElementById('calculatorSecondary');
+const programmingContent = document.getElementById('programmingContent');
+const programmingTitle = document.getElementById('programmingTitle');
+const programmingDescription = document.getElementById('programmingDescription');
+
+const calcBtnPrimary = document.getElementById('calcBtnPrimary');
+const calcBtnSecondary = document.getElementById('calcBtnSecondary');
+
+let dropdownMenu = null;
+
+// Hiển thị menu dropdown
+function createDropdown(button, options) {
+  closeDropdown();
+
+  dropdownMenu = document.createElement('div');
+  dropdownMenu.classList.add('dropdown-menu');
+
+  options.forEach(opt => {
+    const div = document.createElement('div');
+    div.textContent = opt.label;
+    div.onclick = () => {
+      opt.action();
+      closeDropdown();
+    };
+    dropdownMenu.appendChild(div);
+  });
+
+  // Đặt vị trí menu dưới button
+  const rect = button.getBoundingClientRect();
+  dropdownMenu.style.top = `${rect.bottom + window.scrollY}px`;
+  dropdownMenu.style.left = `${rect.left + window.scrollX}px`;
+
+  document.body.appendChild(dropdownMenu);
+}
+
+// Đóng menu dropdown nếu đang mở
+function closeDropdown() {
+  if (dropdownMenu) {
+    dropdownMenu.remove();
+    dropdownMenu = null;
+  }
+}
+
+// Xử lý khi click ngoài menu để đóng
+document.addEventListener('click', e => {
+  if (
+    dropdownMenu &&
+    !dropdownMenu.contains(e.target) &&
+    e.target !== menuBtn &&
+    e.target !== leftMenuBtn
+  ) {
+    closeDropdown();
+  }
+});
+
+// Hiển thị máy tính tiểu học
+function showPrimary() {
+  calculatorPrimary.style.display = 'block';
+  calculatorSecondary.style.display = 'none';
+  programmingContent.style.display = 'none';
+  menuBtn.textContent = "Máy tính tiểu học ▼";
+}
+
+// Hiển thị máy tính cấp 2
+function showSecondary() {
+  calculatorPrimary.style.display = 'none';
+  calculatorSecondary.style.display = 'block';
+  programmingContent.style.display = 'none';
+  menuBtn.textContent = "Máy tính cấp 2 ▼";
+}
+
+// Hiển thị bài học lập trình chi tiết
+function showProgramming(language) {
   calculatorPrimary.style.display = 'none';
   calculatorSecondary.style.display = 'none';
   programmingContent.style.display = 'block';
 
-  // Cập nhật nút menu và tiêu đề bài học
-  menuBtn.innerText = "Chọn máy tính ▼";
-  programmingTitle.innerText = `Bài học: ${language}`;
+  menuBtn.textContent = "Chọn máy tính ▼";
+  programmingTitle.textContent = `Bài học: ${language}`;
 
   let description = "";
 
   switch(language) {
     case "Python":
-      description = `
-🔹 Python là gì?
-Python là một ngôn ngữ lập trình bậc cao, dễ học, cú pháp đơn giản và rất phổ biến.
+      description = 
+`🔸 Giới thiệu:
+Python là ngôn ngữ lập trình dễ học, linh hoạt và rất phổ biến trong khoa học dữ liệu, web, tự động hóa,...
 
-🔹 In ra màn hình:
-print("Hello, World!")
+🔸 In ra màn hình:
+print("Hello, world!")
 
-🔹 Biến & kiểu dữ liệu:
-name = "Lan"
-age = 18
-is_student = True
+🔸 Biến và kiểu dữ liệu:
+x = 5          # số nguyên
+y = 3.14       # số thực
+name = "Lan"   # chuỗi
+is_student = True  # boolean
 
-🔹 Phép toán:
-a = 5
-b = 3
-print(a + b)  # Cộng
-print(a ** b) # Lũy thừa
+🔸 Phép toán cơ bản:
+print(x + y)  # cộng
+print(x ** 2) # lũy thừa
 
-🔹 Câu điều kiện:
-if age >= 18:
-    print("Bạn đã trưởng thành.")
+🔸 Câu điều kiện:
+if x > 0:
+    print("Dương")
 else:
-    print("Bạn chưa đủ tuổi.")
+    print("Không dương")
 
-🔹 Vòng lặp:
+🔸 Vòng lặp:
 for i in range(5):
     print(i)
 
-🔹 Hàm:
-def say_hello(name):
+🔸 Hàm:
+def greet(name):
     print("Xin chào", name)
 
-say_hello("Lan")
+greet("Lan")
 
-🔹 Danh sách:
+🔸 Danh sách (list):
 fruits = ["Táo", "Cam", "Xoài"]
 for fruit in fruits:
-    print(fruit)
-`;
+    print(fruit)`;
       break;
 
     case "Java":
-      description = `
-🔹 Java là gì?
-Java là ngôn ngữ lập trình hướng đối tượng, được dùng rộng rãi trong các hệ thống doanh nghiệp, ứng dụng Android, và phần mềm đa nền tảng.
+      description = 
+`🔸 Giới thiệu:
+Java là ngôn ngữ lập trình hướng đối tượng, mạnh mẽ, được dùng phổ biến cho ứng dụng doanh nghiệp, Android,...
 
-🔹 Chương trình đơn giản:
+🔸 Ví dụ đơn giản:
 public class Hello {
   public static void main(String[] args) {
     System.out.println("Xin chào Java!");
   }
 }
 
-🔹 Biến & kiểu dữ liệu:
+🔸 Biến và kiểu dữ liệu:
 int age = 20;
 String name = "Nam";
 boolean isStudent = true;
 
-🔹 Toán học:
+🔸 Phép toán:
 int a = 10, b = 3;
-System.out.println(a + b); // Cộng
-System.out.println(Math.pow(a, b)); // Lũy thừa
+System.out.println(a + b);           // cộng
+System.out.println(Math.pow(a, b));  // lũy thừa
 
-🔹 Điều kiện:
+🔸 Câu điều kiện:
 if (age >= 18) {
-  System.out.println("Trưởng thành");
+  System.out.println("Đủ tuổi");
 } else {
   System.out.println("Chưa đủ tuổi");
 }
 
-🔹 Vòng lặp:
+🔸 Vòng lặp:
 for (int i = 0; i < 5; i++) {
   System.out.println(i);
 }
 
-🔹 Hàm:
-public static int tong(int x, int y) {
-  return x + y;
+🔸 Hàm:
+public static void greet(String name) {
+  System.out.println("Xin chào " + name);
 }
-System.out.println(tong(5, 10));
 
-🔹 Mảng:
-String[] colors = {"Đỏ", "Xanh", "Vàng"};
-for (String color : colors) {
-  System.out.println(color);
-}
-`;
+greet("Nam");`;
       break;
 
-    case "Scratch":
-      description = `
-🔹 Scratch là gì?
-Scratch là một ngôn ngữ lập trình kéo thả, dành cho trẻ em và người mới học lập trình. Nó giúp rèn tư duy logic thông qua hoạt động tạo game, hoạt hình.
+    case "C":
+      description = 
+`🔸 Giới thiệu:
+C là ngôn ngữ lập trình cấp thấp, hiệu suất cao, thường dùng cho hệ thống nhúng, lập trình hệ điều hành,...
 
-🔹 Giao diện:
-- Sân khấu (Stage)
-- Nhân vật (Sprite)
-- Khối lệnh kéo thả
-
-🔹 Các nhóm lệnh chính:
-- Sự kiện: "Khi nhấn lá cờ xanh"
-- Di chuyển: "Di chuyển 10 bước", "quay 15 độ"
-- Hiển thị: "nói 'xin chào' trong 2 giây"
-- Lặp lại: "lặp lại 10 lần"
-- Điều kiện: "nếu ... thì"
-
-🔹 Ví dụ hoạt động đơn giản:
-[Khi nhấn lá cờ xanh]
-→ [Nói "Xin chào thế giới!" trong 2 giây]
-→ [Di chuyển 50 bước]
-→ [Lặp lại 10 lần → quay 15 độ → di chuyển 10 bước]
-
-🔹 Logic nâng cao:
-- Biến: điểm số, thời gian
-- Cảm biến: chạm màu, chạm cạnh
-- Điều kiện lồng nhau, vòng lặp lồng nhau
-
-🔹 Ứng dụng thực tế:
-- Làm game đơn giản (đuổi bắt, bắn súng)
-- Tạo hoạt hình, kể chuyện
-- Điều khiển robot (LEGO, Arduino qua Scratch)
-`;
-      break;
-
-    case "Các ngôn ngữ khác":
-      description = `
-🔹 C++ là gì?
-C++ là ngôn ngữ mạnh, thường dùng trong game, hệ điều hành và ứng dụng hiệu năng cao.
-
-🔹 Ví dụ:
-#include <iostream>
-using namespace std;
+🔸 Ví dụ in ra màn hình:
+#include <stdio.h>
 
 int main() {
-  cout << "Xin chào từ C++!" << endl;
-  return 0;
+    printf("Xin chào C!\\n");
+    return 0;
 }
 
-🔹 Biến & kiểu dữ liệu:
-int a = 5;
-float b = 2.5;
-string name = "Linh";
+🔸 Biến và kiểu dữ liệu:
+int x = 5;
+float y = 3.14;
+char ch = 'A';
 
-🔹 Vòng lặp & điều kiện:
+🔸 Phép toán:
+int a = 10, b = 3;
+printf("%d\\n", a + b);  // cộng
+printf("%d\\n", a * b);  // nhân
+
+🔸 Câu điều kiện:
+if (x > 0) {
+    printf("Dương\\n");
+} else {
+    printf("Không dương\\n");
+}
+
+🔸 Vòng lặp:
 for (int i = 0; i < 5; i++) {
-  cout << i << endl;
+    printf("%d\\n", i);
 }
 
-if (a > b) {
-  cout << "a lớn hơn b";
+🔸 Hàm:
+int sum(int a, int b) {
+    return a + b;
 }
 
-🔹 JavaScript là gì?
-Ngôn ngữ lập trình dành cho web, chạy trực tiếp trên trình duyệt.
+printf("%d\\n", sum(2, 3));`;
+      break;
 
-🔹 Ví dụ:
-let name = "Trang";
-alert("Xin chào " + name);
+    case "JavaScript":
+      description =
+`🔸 Giới thiệu:
+JavaScript là ngôn ngữ kịch bản cho web, dùng để tương tác, xử lý sự kiện,...
 
-🔹 HTML & CSS là gì?
-- HTML tạo cấu trúc trang web.
-- CSS dùng để làm đẹp và bố cục trang web.
+🔸 In ra màn hình:
+console.log("Xin chào JavaScript!");
 
-🔹 HTML:
-<h1>Xin chào</h1>
-<p>Đây là đoạn văn</p>
+🔸 Biến và kiểu dữ liệu:
+let x = 5;
+const y = 3.14;
+var name = "An";
 
-🔹 CSS:
-h1 {
-  color: red;
-  text-align: center;
+🔸 Phép toán:
+console.log(x + y); // cộng
+console.log(x ** 2); // lũy thừa
+
+🔸 Câu điều kiện:
+if (x > 0) {
+  console.log("Dương");
+} else {
+  console.log("Không dương");
 }
 
-🔹 Ruby:
-puts "Xin chào từ Ruby"
-name = "Mai"
-puts "Tên bạn là #{name}"
-`;
+🔸 Vòng lặp:
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+
+🔸 Hàm:
+function greet(name) {
+  console.log("Xin chào " + name);
+}
+
+greet("An");`;
       break;
 
     default:
-      description = "Nội dung đang cập nhật...";
+      description = "Bài học đang được cập nhật...";
   }
 
-  programmingDescription.innerText = description;
+  programmingDescription.textContent = description;
 }
 
-// Ví dụ: Gắn sự kiện cho menu chọn ngôn ngữ
-document.addEventListener('DOMContentLoaded', () => {
-  const menuItems = document.querySelectorAll('.menu-item');
-  menuItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const language = item.innerText.trim();
-      showProgramming(language);
-    });
-  });
+// Tính toán máy tính tiểu học (dùng eval, cẩn thận input)
+function calculatePrimary() {
+  const expr = document.getElementById('expressionPrimary').value.trim();
+  const resultEl = document.getElementById('resultPrimary');
+  if (!expr) {
+    resultEl.textContent = "Vui lòng nhập biểu thức.";
+    return;
+  }
+
+  try {
+    // Chỉ cho phép các ký tự toán học an toàn (số, +-*/().)
+    if (/[^0-9+\-*/().\s]/.test(expr)) {
+      resultEl.textContent = "Biểu thức không hợp lệ (chỉ dùng số và + - * / ( )).";
+      return;
+    }
+    const result = eval(expr);
+    resultEl.textContent = `Kết quả: ${result}`;
+  } catch {
+    resultEl.textContent = "Biểu thức không hợp lệ.";
+  }
+}
+
+// Tính toán máy tính cấp 2 (hỗ trợ ^ và sqrt())
+function calculateSecondary() {
+  let expr = document.getElementById('expressionSecondary').value.trim();
+  const resultEl = document.getElementById('resultSecondary');
+  if (!expr) {
+    resultEl.textContent = "Vui lòng nhập biểu thức.";
+    return;
+  }
+
+  try {
+    // Chuyển ^ thành lũy thừa Math.pow(a,b)
+    expr = expr.replace(/(\d+)\s*\^\s*(\d+)/g, 'Math.pow($1,$2)');
+
+    // Chuyển sqrt(x) thành Math.sqrt(x)
+    expr = expr.replace(/sqrt\s*\(([^)]+)\)/g, 'Math.sqrt($1)');
+
+    // Kiểm tra ký tự an toàn
+    if (/[^0-9+\-*/().\sMathpowqrt]/i.test(expr)) {
+      resultEl.textContent = "Biểu thức không hợp lệ.";
+      return;
+    }
+
+    // Thực hiện tính toán
+    // eslint-disable-next-line no-eval
+    const result = eval(expr);
+    if (isNaN(result)) {
+      resultEl.textContent = "Biểu thức không hợp lệ.";
+    } else {
+      resultEl.textContent = `Kết quả: ${result}`;
+    }
+  } catch {
+    resultEl.textContent = "Biểu thức không hợp lệ.";
+  }
+}
+
+// Menu "Chọn máy tính"
+menuBtn.addEventListener('click', () => {
+  createDropdown(menuBtn, [
+    { label: 'Máy tính tiểu học', action: showPrimary },
+    { label: 'Máy tính cấp 2', action: showSecondary }
+  ]);
 });
+
+// Menu "Học lập trình"
+leftMenuBtn.addEventListener('click', () => {
+  createDropdown(leftMenuBtn, [
+    { label: 'Python', action: () => showProgramming('Python') },
+    { label: 'Java', action: () => showProgramming('Java') },
+    { label: 'C', action: () => showProgramming('C') },
+    { label: 'JavaScript', action: () => showProgramming('JavaScript') }
+  ]);
+});
+
+// Xử lý tính toán khi nhấn nút
+calcBtnPrimary.addEventListener('click', calculatePrimary);
+calcBtnSecondary.addEventListener('click', calculateSecondary);
+
+// Mặc định mở máy tính tiểu học
+showPrimary();

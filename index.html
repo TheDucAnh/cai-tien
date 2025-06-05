@@ -3,25 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>tutor for programming and caculators </title>
+  <title>Máy tính đa năng & Bài học lập trình</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <button class="menu-btn" id="leftMenuBtn">Menu ▼</button>
-    <h1>Máy Tính</h1>
+    <button class="menu-btn" id="leftMenuBtn">Học lập trình ▼</button>
+    <h1>Máy tính đa năng</h1>
     <button class="menu-btn" id="menuBtn">Chọn máy tính ▼</button>
   </header>
-
-  <!-- Menu dropdown bên trái -->
-  <div id="sideMenuDropdown" style="display:none;">
-    <div onclick="showCalculator('primary')">Máy tính tiểu học</div>
-    <div onclick="showCalculator('secondary')">Máy tính cấp 2</div>
-    <div onclick="showProgramming('Python')">Bài học Python</div>
-    <div onclick="showProgramming('Java')">Bài học Java</div>
-    <div onclick="showProgramming('Scratch')">Bài học Scratch</div>
-    <div onclick="showProgramming('Các ngôn ngữ khác')">Các ngôn ngữ khác</div>
-  </div>
 
   <div class="calculator" id="calculatorContainer">
 
@@ -29,7 +19,7 @@
     <div id="calculatorPrimary" style="display:none;">
       <h2>Máy tính tiểu học</h2>
       <input type="text" id="expressionPrimary" placeholder="Nhập phép tính (ví dụ: 2+3*4)" />
-      <button class="calc-btn" onclick="calculatePrimary()">Tính</button>
+      <button class="calc-btn" id="calcBtnPrimary">Tính</button>
       <p id="resultPrimary"></p>
     </div>
 
@@ -37,13 +27,13 @@
     <div id="calculatorSecondary" style="display:none;">
       <h2>Máy tính cấp 2</h2>
       <input type="text" id="expressionSecondary" placeholder="Ví dụ: 2^3 hoặc sqrt(16)" />
-      <button class="calc-btn" onclick="calculateSecondary()">Tính</button>
+      <button class="calc-btn" id="calcBtnSecondary">Tính</button>
       <p id="resultSecondary"></p>
-      <p><small>Hỗ trợ ^ cho lũy thừa, sqrt() cho căn bậc hai</small></p>
+      <p class="note">Hỗ trợ ^ cho lũy thừa, sqrt() cho căn bậc hai</p>
     </div>
 
-    <!-- Khu vực hiển thị bài học lập trình -->
-    <div id="programmingContent" style="display:none; text-align:left; margin-top:20px;">
+    <!-- Khu vực bài học lập trình -->
+    <div id="programmingContent" style="display:none;">
       <h2 id="programmingTitle"></h2>
       <pre id="programmingDescription"></pre>
     </div>
